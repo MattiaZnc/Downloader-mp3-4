@@ -2,20 +2,13 @@ from pytube import YouTube
 
 def download_mp3_or_mp4_from_youtube(youtube_link, format_choice):
     try:
-        # Add "ytsearch:" prefix to the link for YouTube search
         yt = YouTube("ytsearch:" + youtube_link)
 
-        # Showing details
         print("Titolo: ", yt.title)
-        print("Numero views ", yt.views)
-        print("Lunghezza del video ", yt.length)
-        print("Voto video: ", yt.rating)
 
         if format_choice.lower() == "mp3":
-            # Getting the audio stream with the highest quality available in MP4 format
             stream = yt.streams.filter(only_audio=True, file_extension='mp4').first()
         elif format_choice.lower() == "mp4":
-            # Getting the video stream with the highest quality available in MP4 format
             stream = yt.streams.filter(file_extension='mp4').first()
         else:
             print("Formato non supportato.")
